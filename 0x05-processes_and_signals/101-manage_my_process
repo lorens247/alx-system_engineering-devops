@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Bash script to manage another process manage_my_process
+
+FILE="/var/run/my_process.pid"
+
+# Function to create the PID file
+create()
+{
+    sudo touch $FILE
+    sudo bash -c "echo $$ > $FILE"
+}
+
+# If the argument is 'start', start the process
+if [ "$1" == "start" ]; then
+    create
+    ./manage_my_process &
+    echo "manage_my_process started"
+
+# If the argument is 'stop', stop the process and delete the PID file
+elif [ "$1" == "stop" ]
+then
+    # Check if the PID file exists, kill the process and delete the file
+    [ -e "/var/run/my_process.pid" ] && sudo pkill -f "./manage_my_process" && rm /var/run/my_process.pid
+    echo "manage_my_process stopped"
+
+# If the argument is 'restart', stop and start the process again
+elif [ "$1" == "restart" ]
+then
+    $0 stop >& /dev/null
+    $0 start >& /dev/null
+    echo "manage_my_process restarted"
+
+# If the argument is not recognized, print usage information
+else
+    echo "Usage: manage_my_process {start|stop|restart}"
+fi

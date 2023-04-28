@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Bash script to displays its own PID.
+
+echo $$ # double dollar sign represents the current PID
