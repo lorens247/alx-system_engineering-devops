@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# The script displays "Best School" 10 times using while
+# The script displays "Best School" 10 times
 
 i=1
 
