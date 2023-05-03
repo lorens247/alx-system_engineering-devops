@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# displays the time for 12 hours and 59 minutes
+
+# Set initial values for hours and minutes
+hours=0
+minutes=1
+
+# Loop while hours is less than or equal to 12
+while [[ $hours -le 12 ]]; do
+    # Print the time in 12-hour format
+    if [[ $hours -eq 0 ]]; then
+        echo "12:$minutes AM"
+    elif [[ $hours -lt 12 ]]; then
+        echo "$hours:$minutes AM"
+    elif [[ $hours -eq 12 ]]; then
+        echo "12:$minutes PM"
+    fi
+
+    # Increment minutes and hours as necessary
+    if [[ $minutes -eq 59 ]]; then
+        minutes=0
+        hours=$((hours+1))
+    else
+        minutes=$((minutes+1))
+    fi
+done

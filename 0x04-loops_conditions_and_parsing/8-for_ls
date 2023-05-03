@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Displays the content of the current directory in list format
+
+# Loop over all non-hidden files in the current directory
+for file in *; do
+    # Check if the file is a regular file (not a directory)
+    if [[ -f $file ]]; then
+        # Get the part of the name after the first dash
+        name=$(echo "$file" | cut -d'-' -f2-)
+
+        # Print the name in a list format
+        echo "- $name"
+    fi
+done
