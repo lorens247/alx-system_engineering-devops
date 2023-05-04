@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Listens to the port 98 on localhost using netcat (nc) command
+# The script will continue to run until it is interrupted by pressing `Ctrl + C`.
+
+nc -l 98
