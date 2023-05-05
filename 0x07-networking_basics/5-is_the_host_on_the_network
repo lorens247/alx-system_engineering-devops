@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 # ping command usage
 
-if ["$1" == "" ]; then
-	echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
+# Check if an argument was passed
+if [ -z "$1" ]
+  # Display a usage message if no argument was passed
+	then echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
+# Otherwise, run the ping command with the specified IP address
 else
-	ping -c 5 "$1"
+	ping -c 5 $1
 fi
