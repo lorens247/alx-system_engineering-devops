@@ -7,13 +7,13 @@
 cp /etc/hosts ~/_hosts
 
 # Replace the localhost with 127.0.0.2 in the copied hosts file
-sed -i "s/.*localhost$/127.0.0.2	localhost/g" ~/_hosts
+sed -i "s/.*localhost$/127.0.0.2 localhost/g" ~/_hosts
 
 # Add the IP address and hostname of Facebook
-sed -i "s/.*facebook.com/8.8.8.8	facebook.com/g" ~/_hosts
+sed -i "s/.*facebook.com/8.8.8.8 facebook.com/g" ~/_hosts
 
 # Else append the line ``8.8.8.8 facebook.com/g`` to the file /etc
-echo '8.8.8.8	facebook.com' >> ~/_hosts
+echo '8.8.8.8 facebook.com' >> ~/_hosts
 
 
 # Overwrite the original hosts file with the modified copy

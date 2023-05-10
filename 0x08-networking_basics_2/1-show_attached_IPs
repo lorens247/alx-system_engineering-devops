@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
-# displays all active IPv4 IPs on the machine it’s executed on
+# ip addr show: Displays all network interfaces and their IP addresses.
+# grep "inet ": Filters the output to only show lines containing "inet
+# " (with a space after "inet" to exclude "inet6").
+# awk '{print $2}': Extracts the second column of each line 
+# (the IP address).
+# cut -d'/' -f1: Trims off the CIDR notation from the end of 
+# each IP address.
 
-ifconfig | awk '/ inet / {print $2}'
+ip addr show | grep "inet " | awk '{print $2}' | cut -d'/' -f1
 
-# ``ifconfig`` command without arguments displays only active
-# network interfaces
+
