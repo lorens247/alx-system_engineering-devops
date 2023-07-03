@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# A custom 404 page that contains the string Ceci n'est pas une page
+
+# Install Nginx
+apt-get update
+apt-get -y install nginx
+
+# start and configure Nginx
+service nginx start
+ufw allow 'Nginx HTTP'
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Create custom 404 page
+echo "Ceci n'est pas une page\n" >> /var/www/html/error_404.html
+
+sudo sed -i "s/listen 80 default_server;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+# restart the server
+service nginx restart
