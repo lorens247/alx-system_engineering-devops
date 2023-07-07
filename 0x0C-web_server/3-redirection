@@ -1,24 +1,28 @@
 #!/usr/bin/env bash
-# Redirect /redirect_me to a youtube video
 
 # Install Nginx
 sudo apt-get update
 sudo apt-get -y install nginx
 
-# start and configure Nginx
+# Install UFW (Uncomplicated Firewall)
+sudo apt-get -y install ufw
+
+# Firewall setting
+sudo ufw allow 'Nginx HTTP'
+
+# Configure Nginx
 sudo sed -i 's/80 default_server/80/' /etc/nginx/sites-available/default
 
-# create index.html & configure the redirection
-echo 'Hello World!' > /etc/nginx/html/index.html
-printf %s "server {
-    listen 80;
-    listen [::]:80 default_server;
-    root   /etc/nginx/html;
-    index  index.html index.htm;
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-    }
-}" > /etc/nginx/sites-available/default
+# Create index.html
+echo 'Hello World!' | sudo tee /var/www/html/index.html
 
-# restart service
-service nginx restart
+# Set ownership and permissions
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 755 /var/www/html
+
+# Configure the redirection
+sudo sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+
+# Restart Nginx
+sudo service nginx restart
+
