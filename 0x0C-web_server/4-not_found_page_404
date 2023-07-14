@@ -5,25 +5,28 @@
 sudo apt-get update -y
 sudo apt-get install -y nginx
 
-# Firewall setting
-sudo ufw allow 'Nginx HTTP'
-
 # start and configure Nginx
 sudo sed -i 's/80 default_server/80/' /etc/nginx/sites-available/default
 
 # create index.html & configure the redirection and return error pages
 echo 'Hello World!' > /etc/nginx/html/index.html
+echo "Ceci n'est pas une page\n" > /var/www/html/error_404.html
 
-# Give the user ownership
-chown -R $USER:$USER /etc/nginx/html
-chmod -R 755 /etc/nginx/
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /etc/nginx/html;
+    index  index.html index.htm;
+    location /redirect_me {
+        return 301 https://stackoverflow.com/;
+    }
 
-# Redirect to /redirect_me to a youtube video
-sed -i '37i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
-
-# Setup 404 page
-echo "Ceci n'est pas une page\n" >> /var/www/html/error_404.html
-sed -i '38i\error_page 404 /error_404.html;' /etc/nginx/sites-available/default
+    error_page 404 /404.html;
+    location = /404.html {
+        root /etc/nginx/html;
+        internal;
+    }
+}" > /etc/nginx/sites-available/default
 
 #restart the server
-service nginx start
+service nginx restart
