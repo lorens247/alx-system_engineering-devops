@@ -9,21 +9,21 @@ sudo apt-get install -y nginx
 sudo sed -i 's/80 default_server/80/' /etc/nginx/sites-available/default
 
 # create index.html & configure the redirection and return error pages
-echo 'Hello World!' > /etc/nginx/html/index.html
+echo 'Hello World!' > /var/www/html/index.html
 echo "Ceci n'est pas une page\n" > /var/www/html/error_404.html
 
 printf %s "server {
     listen 80;
     listen [::]:80 default_server;
-    root   /etc/nginx/html;
+    root   /var/www/html;
     index  index.html index.htm;
     location /redirect_me {
-        return 301 https://stackoverflow.com/;
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4/;
     }
 
     error_page 404 /404.html;
     location = /404.html {
-        root /etc/nginx/html;
+        root /var/www/html;
         internal;
     }
 }" > /etc/nginx/sites-available/default
