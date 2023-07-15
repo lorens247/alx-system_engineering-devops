@@ -9,8 +9,8 @@ sudo apt-get install -y nginx
 sudo sed -i 's/80 default_server/80/' /etc/nginx/sites-available/default
 
 # create index.html & configure the redirection and return error pages
-echo 'Hello World!' > /var/www/html/index.html
-echo "Ceci n'est pas une page" > /var/www/html/error_404.html
+echo 'Hello World!' | sudo tee /var/www/html/index.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
 printf %s "server {
     listen 80;
