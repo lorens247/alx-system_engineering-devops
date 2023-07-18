@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# script to link sites-enabled to sites-available
+
+Remove the default Nginx site configuration
+sudo rm /etc/nginx/sites-enabled/default
+
+# Create a symbolic link to the default site configuration
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# Start the Nginx service
+sudo service nginx start

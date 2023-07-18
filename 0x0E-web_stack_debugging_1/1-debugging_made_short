@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# make your fix short and sweet
+
+# Create a symbolic link to the default Nginx configuration file
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# Start the Nginx service
+sudo service nginx start
+
+# Remove the Nginx process ID file
+rm /run/nginx.pid
