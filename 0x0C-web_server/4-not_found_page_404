@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# A custom 404 page that contains the string Ceci n'est pas une page
+
+# Install Nginx
+sudo apt-get update -y
+sudo apt-get install -y nginx
+
+# start and configure Nginx
+sudo sed -i 's/80 default_server/80/' /etc/nginx/sites-available/default
+
+# create index.html & configure the redirection and return error pages
+echo 'Hello World!' | sudo tee /var/www/html/index.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /var/www/html;
+    index  index.html index.htm;
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4/;
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+        root /var/www/html;
+        internal;
+    }
+}" > /etc/nginx/sites-available/default
+
+#restart the server
+service nginx restart

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Variables
+local_file="1-install_nginx_web_server"
+remote_user="ubuntu"
+remote_host="34.239.254.26"
+remote_path="/"
+# Transfer the file
+scp "$local_file" "$remote_user@$remote_host:$remote_path"
+
