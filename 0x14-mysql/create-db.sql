@@ -10,4 +10,4 @@ CREATE TABLE IF NOT EXISTS tyrell_corp.nexus6
 );
 
 -- Insert an entry
-INSERT INTO `tyrell_corp.nexus6` (`name`) VALUES ("Emmastro");
+INSERT INTO `tyrell_corp.nexus6` (`name`) VALUES ("Lawrence");
