@@ -14,7 +14,7 @@ def number_of_subscribers(subreddit):
 
     # Make a GET request to the Reddit API
     response = requests.get(url, headers=headers)
-    
+
     # Check if the request was successful (status code 200)
     if response.status_code == 200:
         # Parse the JSON response and return the number of subscribers
@@ -23,4 +23,3 @@ def number_of_subscribers(subreddit):
     else:
         # If the subreddit is invalid or there was an error, return 0
         return 0
-
