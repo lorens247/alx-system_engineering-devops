@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-'''
-A recursive function that queries the Reddit API, parses the title
-of all hot articles, and prints a sorted count of given keywords
-'''
-import requests
+""" 
+Count it! 
+"""
+from requests import get
+
 
 def count_words(subreddit, word_list, after=None, word_counts=None):
     # Base URL for Reddit API endpoint to get hot posts in a subreddit
@@ -56,4 +56,5 @@ if __name__ == '__main__':
         subreddit = sys.argv[1]
         keywords = sys.argv[2:]
         count_words(subreddit, keywords)
+
 
