@@ -5,6 +5,7 @@ of the first 10 hot posts listed for a given subreddit.
 '''
 
 import requests
+
 def top_ten(subreddit):
     # URL for Reddit API endpoint to get hot posts in a subreddit
     url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10"
@@ -32,6 +33,5 @@ def top_ten(subreddit):
             else:
                 subreddit = sys.argv[1]
                 top_ten(subreddit)
-
 
 
