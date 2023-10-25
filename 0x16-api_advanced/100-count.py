@@ -2,7 +2,7 @@
 """ 
 Count it! 
 """
-from requests import get
+import requests
 
 
 def count_words(subreddit, word_list, after=None, word_counts=None):
@@ -31,7 +31,7 @@ def count_words(subreddit, word_list, after=None, word_counts=None):
         for post in data['data']['children']:
             title = post['data']['title'].lower()
             for word in word_list:
-                if f" {word.lower()} " in f" {title} ":
+                if word.lower() in title:
                     word_counts[word.lower()] += 1
         
         # If there are more posts, recursively call the function with the 'after' parameter
