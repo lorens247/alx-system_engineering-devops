@@ -6,6 +6,7 @@ containing the titles of all hot articles for a subreddit
 
 import requests
 
+
 def recurse(subreddit, hot_list=[], after=None):
     # Base URL for Reddit API endpoint to get hot posts in a subreddit
     url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
@@ -16,8 +17,8 @@ def recurse(subreddit, hot_list=[], after=None):
 
     # Make a GET request to the Reddit API
     response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
-    
-    # Check if the response is successful (status code 200)
+
+# Check if the response is successful (status code 200)
     if response.status_code == 200:
         # Parse the JSON response
         data = response.json()
@@ -25,8 +26,8 @@ def recurse(subreddit, hot_list=[], after=None):
         # Extract titles of posts and add them to the hot_list
         for post in data['data']['children']:
             hot_list.append(post['data']['title'])
-        
-        # If there are more posts, recursively call the function with the 'after' parameter
+
+        # If more, recursively call the function with the 'after' parameter
         if data['data']['after']:
             return recurse(subreddit, hot_list, after=data['data']['after'])
         else:
@@ -48,4 +49,5 @@ if __name__ == '__main__':
             print(len(hot_list))
         else:
             print("None")
+
 
