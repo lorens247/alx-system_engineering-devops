@@ -12,4 +12,4 @@ provider => shell,
 exec { 'change-os-configuration-for-holberton-user':
 command  => 'sysctl -p',
 provider => shell,
-} 
+}
